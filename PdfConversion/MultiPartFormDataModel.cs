@@ -8,8 +8,6 @@ namespace PdfConversion
 {
     public class MultiPartFormDataModel
     {
-        // багатокомпонентні дані форми
-        // завантажує користувач // обьект дати передачі
         public byte[] FileUpload { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-using System;
+
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +12,7 @@ using Microsoft.OpenApi.Models;
 using System.Net;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
-using Microsoft.Net.Http.Headers;
+
 
 namespace PdfConversion
 {
@@ -34,7 +34,6 @@ namespace PdfConversion
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             text = text ?? data?.name;
 
-            // конвертуємо за допомогою  Syncfusion 
             using PdfDocument document = new PdfDocument();
             PdfPage page = document.Pages.Add();
 
@@ -46,13 +45,13 @@ namespace PdfConversion
             using MemoryStream outputPdfStream = new  MemoryStream();
             document.Save(outputPdfStream);
             outputPdfStream.Position = 0;
-            document.Dispose();
+            document.Dispose(); 
 
             string contentType = "application/pdf";
             string fileName = "document.pdf";
 
-
             req.HttpContext.Response.Headers.Add("Content-Disposition", $"attachment;{fileName}");
+
             return new FileContentResult(outputPdfStream.ToArray(),contentType);
         }
     }
